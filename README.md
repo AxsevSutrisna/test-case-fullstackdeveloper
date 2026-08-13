@@ -3,7 +3,6 @@
 ## 2. Teknologi & Stack
 * **Backend**: Go (Golang) v1.20+, Framework Gin, GORM ORM, MySQL Database, JWT (JSON Web Token), Bcrypt Password Hashing.
 * **Frontend**: React 19, Vite, TypeScript, React Router v7, TanStack React Query v5, React Hook Form, Zod Validation, Lucide Icons.
-* **Styling**: Modern Clean Minimalist Vanilla CSS (White Theme).
 
 ---
 
@@ -25,7 +24,7 @@
 
 ---
 
-### Langkah 2: Menjalankan Backend (Go API)
+### Langkah 2: Menjalankan Backend
 1. Buka Terminal / Command Prompt dan masuk ke direktori `backend`:
    ```bash
    cd backend
@@ -40,7 +39,7 @@
 
 ---
 
-### Langkah 3: Menjalankan Frontend (React SPA)
+### Langkah 3: Menjalankan Frontend
 1. Buka terminal baru dan masuk ke direktori `frontend`:
    ```bash
    cd frontend
@@ -49,11 +48,11 @@
    ```bash
    npm install
    ```
-3. Jalankan server pengembang (*development server*):
+3. Jalankan server:
    ```bash
    npm run dev
    ```
-4. Buka browser Anda dan akses aplikasi pada:
+4. Buka browser dan akses aplikasi pada:
     **`http://localhost:5173`**
 
 ---
