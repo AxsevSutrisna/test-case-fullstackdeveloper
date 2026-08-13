@@ -73,26 +73,7 @@ Sistem telah secara otomatis mendaftarkan akun penguji default saat backend dija
 
 ---
 
-##  5. Fitur Utama yang Terimplementasi
-*  **Authentikasi & Keamanan**:
-  * Pendaftaran akun (Register) dengan enkripsi password Bcrypt.
-  * Login dengan pengembalian token JWT.
-  * Proteksi route backend & frontend (hanya user terautentikasi yang bisa mengakses fitur CRUD).
-  * Tombol mata pada input password (Show / Hide Password toggle).
-*  **Manajemen Transaksi (CRUD)**:
-  * **Create**: Tambah transaksi baru dengan format otomatis Rupiah (`Rp. 50.000`) & penanganan pencegahan nilai negatif.
-  * **Read List & Detail**: Menampilkan daftar transaksi dalam tabel dan otomatis mengisi data saat edit.
-  * **Update**: Memperbarui detail transaksi & status pembayaran (*Pending*, *Success*, *Failed*).
-  * **Delete**: Menghapus data transaksi dengan dialog konfirmasi.
-  * **Validasi Keunikan**: Pencegahan nomor pelanggan duplikat (`customer_number`).
-*  **State Management & UI**:
-  * Handling State: *Loading*, *Sukses*, *Gagal (Error Alert)*, dan *Kosong (Empty State)*.
-  * Desain antarmuka profesional, bersih, dan minimalis berbasis tema putih murni.
-
----
-
-##  6. Bagian yang Belum Selesai (Status Proyek)
-* **Status**: **100% SELESAI** (Seluruh kriteria wajib backend, frontend, authentikasi, CRUD, validasi, dan penanganan state telah terpenuhi sepenuhnya).
-* **Rencana Pengembangan Selanjutnya (Future Improvements)**:
-  * Fitur ekspor laporan daftar transaksi ke format PDF / Excel.
-  * Integrasi dengan Payment Gateway SDK asli (misal: Midtrans / Xendit Sandbox).
+##  5. Bagian yang Belum Selesai
+* Data transaksi belum bersifat privat per akun (setiap akun yang login masih melihat dan mengelola data transaksi global yang sama karena belum dihubungkan ke `user_id`).
+* Fitur pencarian dan penyaringan data transaksi (filtering berdasarkan status, metode pembayaran, atau rentang tanggal).
+* Halaman tampilan detail data transaksi secara khusus/terpisah (saat ini detail transaksi di-load langsung ke dalam form edit).
