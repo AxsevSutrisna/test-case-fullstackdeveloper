@@ -1,23 +1,13 @@
 # SimplePG - Simple Payment Gateway Management System
 
-Aplikasi *fullstack* (Go + React) sederhana untuk **Manajemen Transaksi Payment Gateway** yang dilengkapi dengan sistem authentikasi JWT, validasi data transaksi, dan antarmuka pengguna (*UI*) yang modern, bersih, serta responsif.
-
----
-
-## 📌 1. Tema yang Dipilih
-**Payment Gateway / Manajemen Transaksi Pembayaran (`SimplePG`)**
-Sistem ini digunakan untuk mengelola transaksi pembayaran pelanggan, memantau status pembayaran (*Success*, *Pending*, *Failed*), serta mencegah duplikasi data transaksi.
-
----
-
-## 🛠️ 2. Teknologi & Stack
+## 2. Teknologi & Stack
 * **Backend**: Go (Golang) v1.20+, Framework Gin, GORM ORM, MySQL Database, JWT (JSON Web Token), Bcrypt Password Hashing.
 * **Frontend**: React 19, Vite, TypeScript, React Router v7, TanStack React Query v5, React Hook Form, Zod Validation, Lucide Icons.
 * **Styling**: Modern Clean Minimalist Vanilla CSS (White Theme).
 
 ---
 
-## 🚀 3. Cara Menjalankan (Langkah demi Langkah)
+## 3. Cara Menjalankan (Langkah demi Langkah)
 
 ### Prasyarat:
 * **Go** (v1.20 atau lebih baru)
@@ -46,7 +36,7 @@ Sistem ini digunakan untuk mengelola transaksi pembayaran pelanggan, memantau st
    go run main.go
    ```
 4. Backend akan melakukan **Auto Migration** tabel `users` & `transactions` serta memasukkan **Seed Data awal**. Server akan berjalan pada:
-   👉 **`http://localhost:8080`**
+    **`http://localhost:8080`**
 
 ---
 
@@ -64,11 +54,11 @@ Sistem ini digunakan untuk mengelola transaksi pembayaran pelanggan, memantau st
    npm run dev
    ```
 4. Buka browser Anda dan akses aplikasi pada:
-   👉 **`http://localhost:5173`**
+    **`http://localhost:5173`**
 
 ---
 
-## 🔑 4. Akun Login untuk Testing & Cara Register
+##  4. Akun Login untuk Testing & Cara Register
 
 ### Akun Bawaan (Seed User):
 Sistem telah secara otomatis mendaftarkan akun penguji default saat backend dijalankan pertama kali:
@@ -83,25 +73,25 @@ Sistem telah secara otomatis mendaftarkan akun penguji default saat backend dija
 
 ---
 
-## 📋 5. Fitur Utama yang Terimplementasi
-* ✅ **Authentikasi & Keamanan**:
+##  5. Fitur Utama yang Terimplementasi
+*  **Authentikasi & Keamanan**:
   * Pendaftaran akun (Register) dengan enkripsi password Bcrypt.
   * Login dengan pengembalian token JWT.
   * Proteksi route backend & frontend (hanya user terautentikasi yang bisa mengakses fitur CRUD).
   * Tombol mata pada input password (Show / Hide Password toggle).
-* ✅ **Manajemen Transaksi (CRUD)**:
+*  **Manajemen Transaksi (CRUD)**:
   * **Create**: Tambah transaksi baru dengan format otomatis Rupiah (`Rp. 50.000`) & penanganan pencegahan nilai negatif.
   * **Read List & Detail**: Menampilkan daftar transaksi dalam tabel dan otomatis mengisi data saat edit.
   * **Update**: Memperbarui detail transaksi & status pembayaran (*Pending*, *Success*, *Failed*).
   * **Delete**: Menghapus data transaksi dengan dialog konfirmasi.
   * **Validasi Keunikan**: Pencegahan nomor pelanggan duplikat (`customer_number`).
-* ✅ **State Management & UI**:
+*  **State Management & UI**:
   * Handling State: *Loading*, *Sukses*, *Gagal (Error Alert)*, dan *Kosong (Empty State)*.
   * Desain antarmuka profesional, bersih, dan minimalis berbasis tema putih murni.
 
 ---
 
-## 🚧 6. Bagian yang Belum Selesai (Status Proyek)
+##  6. Bagian yang Belum Selesai (Status Proyek)
 * **Status**: **100% SELESAI** (Seluruh kriteria wajib backend, frontend, authentikasi, CRUD, validasi, dan penanganan state telah terpenuhi sepenuhnya).
 * **Rencana Pengembangan Selanjutnya (Future Improvements)**:
   * Fitur ekspor laporan daftar transaksi ke format PDF / Excel.
