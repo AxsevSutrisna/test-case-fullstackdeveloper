@@ -1,0 +1,18 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+test-case-backend
+
+# Environment variables
+.env
+.env.*
+
+# OS specific files
+.DS_Store
+
+# IDE and Editor files
+.vscode/
+.idea/
