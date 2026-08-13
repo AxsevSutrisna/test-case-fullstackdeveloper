@@ -2,6 +2,7 @@ package utils
 
 import (
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -19,7 +20,7 @@ func getJWTSecret() string {
 func GenerateToken(userID uint) (string, error) {
 	expirationTime := time.Now().Add(24 * time.Hour)
 	claims := &jwt.RegisteredClaims{
-		Subject:   string(userID),
+		Subject:   strconv.FormatUint(uint64(userID), 10),
 		ExpiresAt: jwt.NewNumericDate(expirationTime),
 	}
 
