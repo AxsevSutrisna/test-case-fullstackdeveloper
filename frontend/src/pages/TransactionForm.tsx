@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,10 +10,25 @@ import { Card } from '../components/Card';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 
+const formatRupiah = (val: string | number): string => {
+  if (!val) return '';
+  const digits = String(val).replace(/\D/g, '');
+  if (!digits) return '';
+  const numberVal = parseInt(digits, 10);
+  if (isNaN(numberVal) || numberVal <= 0) return '';
+  return 'Rp. ' + numberVal.toLocaleString('id-ID');
+};
+
 const txSchema = z.object({
   customer_number: z.string().min(1, "No. Pelanggan wajib diisi"),
   customer_name: z.string().min(1, "Nama Pelanggan wajib diisi"),
-  amount: z.string().min(1, "Nominal wajib diisi"),
+  amount: z
+    .string()
+    .min(1, "Nominal wajib diisi")
+    .refine((val) => {
+      const num = Number(val.replace(/\D/g, ''));
+      return num > 0;
+    }, { message: "Nominal tidak boleh 0 atau negatif" }),
   payment_method: z.string().min(1, "Pilih metode pembayaran"),
   status: z.enum(['Pending', 'Success', 'Failed']),
 });
@@ -25,8 +40,9 @@ export const TransactionForm: React.FC = () => {
   const isEdit = !!id;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<TxForm>({
+  const { register, handleSubmit, reset, watch, setValue, formState: { errors, isSubmitting } } = useForm<TxForm>({
     resolver: zodResolver(txSchema),
     defaultValues: {
       status: 'Pending',
@@ -35,7 +51,6 @@ export const TransactionForm: React.FC = () => {
     }
   });
 
-  // Fetch data if editing
   const { data: txData, isLoading: isFetching } = useQuery({
     queryKey: ['transaction', id],
     queryFn: async () => {
@@ -69,14 +84,17 @@ export const TransactionForm: React.FC = () => {
       navigate('/');
     },
     onError: (err: any) => {
-      alert(err.response?.data?.error || 'Gagal menyimpan data');
+      const msg = err.response?.data?.error || 'Gagal menyimpan data';
+      setErrorMsg(msg);
     }
   });
 
   const onSubmit = (data: TxForm) => {
+    setErrorMsg('');
+    const rawDigits = data.amount.replace(/\D/g, '');
     const formattedData = {
       ...data,
-      amount: Number(data.amount)
+      amount: Number(rawDigits)
     };
     saveMutation.mutate(formattedData);
   };
@@ -95,6 +113,12 @@ export const TransactionForm: React.FC = () => {
         </div>
 
         <Card>
+          {errorMsg && (
+            <div className="mb-4" style={{ padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', color: 'var(--danger)', borderRadius: 'var(--radius-md)', fontSize: '0.875rem' }}>
+              {errorMsg}
+            </div>
+          )}
+
           {isFetching ? (
             <div className="text-center" style={{ padding: '2rem' }}>
               <span className="loader"></span>
@@ -120,9 +144,13 @@ export const TransactionForm: React.FC = () => {
 
               <Input 
                 label="Nominal (Rp)" 
-                type="number" 
-                placeholder="50000"
-                {...register('amount')}
+                type="text" 
+                placeholder="Rp. 50.000"
+                value={formatRupiah(watch('amount') || '')}
+                onChange={(e) => {
+                  const rawDigits = e.target.value.replace(/\D/g, '');
+                  setValue('amount', rawDigits, { shouldValidate: true });
+                }}
                 error={errors.amount?.message}
               />
 

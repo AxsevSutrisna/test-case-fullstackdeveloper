@@ -43,6 +43,12 @@ func CreateTransaction(c *gin.Context) {
 		return
 	}
 
+	var existingTx models.Transaction
+	if err := config.DB.Where("customer_number = ?", input.CustomerNumber).First(&existingTx).Error; err == nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Nomor pelanggan sudah terdaftar pada transaksi lain"})
+		return
+	}
+
 	transaction := models.Transaction{
 		CustomerNumber: input.CustomerNumber,
 		CustomerName:   input.CustomerName,
@@ -71,6 +77,12 @@ func UpdateTransaction(c *gin.Context) {
 	var input TransactionInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	var existingTx models.Transaction
+	if err := config.DB.Where("customer_number = ? AND id != ?", input.CustomerNumber, transaction.ID).First(&existingTx).Error; err == nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Nomor pelanggan sudah terdaftar pada transaksi lain"})
 		return
 	}
 

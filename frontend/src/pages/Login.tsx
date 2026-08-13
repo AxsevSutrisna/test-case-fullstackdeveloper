@@ -49,7 +49,7 @@ export const Login: React.FC = () => {
         
         <Card>
           {errorMsg && (
-            <div className="mb-4" style={{ padding: '0.75rem', backgroundColor: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', borderRadius: 'var(--radius-md)', fontSize: '0.875rem' }}>
+            <div className="mb-4" style={{ padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', color: 'var(--danger)', borderRadius: 'var(--radius-md)', fontSize: '0.875rem' }}>
               {errorMsg}
             </div>
           )}
